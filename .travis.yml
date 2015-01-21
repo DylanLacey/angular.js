@@ -10,10 +10,6 @@ env:
   - JOB=docs-e2e BROWSER_PROVIDER=saucelabs
   - JOB=e2e TEST_TARGET=jqlite BROWSER_PROVIDER=saucelabs
   - JOB=e2e TEST_TARGET=jquery BROWSER_PROVIDER=saucelabs
-  - JOB=unit BROWSER_PROVIDER=browserstack
-  - JOB=docs-e2e BROWSER_PROVIDER=browserstack
-  - JOB=e2e TEST_TARGET=jqlite BROWSER_PROVIDER=browserstack
-  - JOB=e2e TEST_TARGET=jquery BROWSER_PROVIDER=browserstack
   global:
   - BROWSER_STACK_USERNAME=VojtaJina
   - BROWSER_STACK_ACCESS_KEY=QCQJ1ZpWXpBkSwEdD8ev
@@ -21,9 +17,6 @@ env:
   - BROWSER_PROVIDER_READY_FILE=/tmp/browsersprovider-tunnel-ready
   - secure: D1lBCfplkUQH2+apicVKLoGgUuX6LVR8dCYKvHAj8J/kIvjzfM8N/R+w05pDGsiuC6pB8KQE7Dz92r92ZczilrzfWwPAfS4o04WhMVx8Qs5C+3ryCbxnRyhxYKUOQcZmk3mg+YrQ9nC5UZPDeTm+bcKupV6WPTXiclt7GWJ9ywE=
   - secure: G8m2PDrD8teDKSfvRWht1SuGv4906JJmdUs/1JlwGT5mj31TRAvUgIK4SI7GKykqf9Bua7RUOXuwV6zQMQgeDcUpWvNWHx7abH4s5Ubk8nVR7i/Sivl6hVWYDXlfWtvVltIJy+sofFPUAcAb1zJCjulUUkodZWy+f4iRbkmtycE=
-matrix:
-  allow_failures:
-  - env: JOB=unit BROWSER_PROVIDER=browserstack
 install:
 - npm config set spin false
 - npm config set loglevel http
