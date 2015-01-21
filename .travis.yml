@@ -32,10 +32,5 @@ script:
 - "./scripts/travis/build.sh"
 after_script:
 - "./scripts/travis/print_logs.sh"
-notifications:
-  webhooks:
-    urls:
-    - https://webhooks.gitter.im/e/d2120f3f2bb39a4531b2
-    on_success: change
-    on_failure: always
-    on_start: false
+after_failure:
+- cat $LOGS_DIR/sauce-connect.stderr
