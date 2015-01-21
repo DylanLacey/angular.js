@@ -1,59 +1,48 @@
 language: node_js
 node_js:
-  - '0.10'
-
+- '0.10'
 branches:
   except:
-    - /^g3_.*$/
-
+  - "/^g3_.*$/"
 env:
   matrix:
-    - JOB=unit BROWSER_PROVIDER=saucelabs
-    - JOB=docs-e2e BROWSER_PROVIDER=saucelabs
-    - JOB=e2e TEST_TARGET=jqlite BROWSER_PROVIDER=saucelabs
-    - JOB=e2e TEST_TARGET=jquery BROWSER_PROVIDER=saucelabs
-    - JOB=unit BROWSER_PROVIDER=browserstack
-    - JOB=docs-e2e BROWSER_PROVIDER=browserstack
-    - JOB=e2e TEST_TARGET=jqlite BROWSER_PROVIDER=browserstack
-    - JOB=e2e TEST_TARGET=jquery BROWSER_PROVIDER=browserstack
+  - JOB=unit BROWSER_PROVIDER=saucelabs
+  - JOB=docs-e2e BROWSER_PROVIDER=saucelabs
+  - JOB=e2e TEST_TARGET=jqlite BROWSER_PROVIDER=saucelabs
+  - JOB=e2e TEST_TARGET=jquery BROWSER_PROVIDER=saucelabs
+  - JOB=unit BROWSER_PROVIDER=browserstack
+  - JOB=docs-e2e BROWSER_PROVIDER=browserstack
+  - JOB=e2e TEST_TARGET=jqlite BROWSER_PROVIDER=browserstack
+  - JOB=e2e TEST_TARGET=jquery BROWSER_PROVIDER=browserstack
   global:
-    - SAUCE_USERNAME=angular-ci
-    - SAUCE_ACCESS_KEY=9b988f434ff8-fbca-8aa4-4ae3-35442987
-    - BROWSER_STACK_USERNAME=VojtaJina
-    - BROWSER_STACK_ACCESS_KEY=QCQJ1ZpWXpBkSwEdD8ev
-    - LOGS_DIR=/tmp/angular-build/logs
-    - BROWSER_PROVIDER_READY_FILE=/tmp/browsersprovider-tunnel-ready
-
+  - BROWSER_STACK_USERNAME=VojtaJina
+  - BROWSER_STACK_ACCESS_KEY=QCQJ1ZpWXpBkSwEdD8ev
+  - LOGS_DIR=/tmp/angular-build/logs
+  - BROWSER_PROVIDER_READY_FILE=/tmp/browsersprovider-tunnel-ready
+  - secure: D1lBCfplkUQH2+apicVKLoGgUuX6LVR8dCYKvHAj8J/kIvjzfM8N/R+w05pDGsiuC6pB8KQE7Dz92r92ZczilrzfWwPAfS4o04WhMVx8Qs5C+3ryCbxnRyhxYKUOQcZmk3mg+YrQ9nC5UZPDeTm+bcKupV6WPTXiclt7GWJ9ywE=
+  - secure: G8m2PDrD8teDKSfvRWht1SuGv4906JJmdUs/1JlwGT5mj31TRAvUgIK4SI7GKykqf9Bua7RUOXuwV6zQMQgeDcUpWvNWHx7abH4s5Ubk8nVR7i/Sivl6hVWYDXlfWtvVltIJy+sofFPUAcAb1zJCjulUUkodZWy+f4iRbkmtycE=
 matrix:
   allow_failures:
-    - env: "JOB=unit BROWSER_PROVIDER=browserstack"
-
+  - env: JOB=unit BROWSER_PROVIDER=browserstack
 install:
-  # - npm config set registry http://23.251.144.68
-  # Disable the spinner, it looks bad on Travis
-  - npm config set spin false
-  # Log HTTP requests
-  - npm config set loglevel http
-  - time ./scripts/travis/npm-bundle-deps.sh
-  - time npm install
-
+- npm config set spin false
+- npm config set loglevel http
+- time ./scripts/travis/npm-bundle-deps.sh
+- time npm install
 before_script:
-  - mkdir -p $LOGS_DIR
-  - ./scripts/travis/start_browser_provider.sh
-  - npm install -g grunt-cli
-  - grunt package
-  - ./scripts/travis/wait_for_browser_provider.sh
-
+- mkdir -p $LOGS_DIR
+- "./scripts/travis/start_browser_provider.sh"
+- npm install -g grunt-cli
+- grunt package
+- "./scripts/travis/wait_for_browser_provider.sh"
 script:
-  - ./scripts/travis/build.sh
-
+- "./scripts/travis/build.sh"
 after_script:
-  - ./scripts/travis/print_logs.sh
-
+- "./scripts/travis/print_logs.sh"
 notifications:
   webhooks:
     urls:
-      - https://webhooks.gitter.im/e/d2120f3f2bb39a4531b2
-    on_success: change  # options: [always|never|change] default: always
-    on_failure: always  # options: [always|never|change] default: always
-    on_start: false     # default: false
+    - https://webhooks.gitter.im/e/d2120f3f2bb39a4531b2
+    on_success: change
+    on_failure: always
+    on_start: false
