@@ -33,4 +33,4 @@ script:
 after_script:
 - "./scripts/travis/print_logs.sh"
 after_failure:
-- cat $LOGS_DIR/sauce-connect.stderr
+- "./scripts/travis/print_logs.sh"
