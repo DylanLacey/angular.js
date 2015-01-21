@@ -27,10 +27,5 @@ before_script:
 - "./scripts/travis/start_browser_provider.sh"
 - npm install -g grunt-cli
 - grunt package
-- "./scripts/travis/wait_for_browser_provider.sh"
 script:
-- "./scripts/travis/build.sh"
-after_script:
-- "./scripts/travis/print_logs.sh"
-after_failure:
 - "./scripts/travis/print_logs.sh"
